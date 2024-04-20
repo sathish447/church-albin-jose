@@ -33,5 +33,18 @@ Route::get('/', function () {
             // 'middleware' => ['checkPrivilege:dev;dashboard'],
         ]);
 
+
+        // Roles
+        Route::get('role', [
+            'as' => 'role.index',
+            'uses' => 'RoleController@index',
+            'middleware' => ['checkPrivilege:role'],
+        ]);
+        Route::get('role/list', [
+            'as' => 'role.list',
+            'uses' => 'RoleController@result',
+            'middleware' => ['checkPrivilege:role'],
+        ]);
+
     });
 
