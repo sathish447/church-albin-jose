@@ -33,16 +33,31 @@ Route::get('/', function () {
             // 'middleware' => ['checkPrivilege:dev;dashboard'],
         ]);
 
-
         // Roles
         Route::get('role', [
             'as' => 'role.index',
             'uses' => 'RoleController@index',
-            'middleware' => ['checkPrivilege:role'],
+            // 'middleware' => ['checkPrivilege:role'],
         ]);
         Route::get('role/list', [
             'as' => 'role.list',
             'uses' => 'RoleController@result',
+            // 'middleware' => ['checkPrivilege:role'],
+        ]);
+
+        Route::get('role/create-update/{id?}', [
+            'as' => 'role.create.update',
+            'uses' => 'RoleController@createUpdate',
+            'middleware' => ['checkPrivilege:role'],
+        ]);
+        Route::post('role/create-update', [
+            'as' => 'role.create.update.post',
+            'uses' => 'RoleController@createUpdatePost',
+            'middleware' => ['checkPrivilege:role'],
+        ]);
+        Route::get('role/action/{id}/{status}', [
+            'as' => 'role.action',
+            'uses' => 'RoleController@action',
             'middleware' => ['checkPrivilege:role'],
         ]);
 
