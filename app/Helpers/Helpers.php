@@ -217,3 +217,137 @@ if (!function_exists('ver')) {
         return config("constant.version");
     }
 }
+
+/**
+ * Function Action Buttons
+ */
+if (!function_exists('actionButtons')) {
+    /**
+     * PARAMETER SAMPLE
+    // "edit" => route('role.edit', [$result->id]),
+    // "editAjax" => [
+    //     "id" => $result->id,
+    //     "function" => "addEdit",
+    // ],
+    // "status" => [
+    //     "id" => $result->id,
+    //     "status" => $result->is_active,
+    //     "datatable_id" => "datatable",
+    // ],
+    // "delete" => [
+    //     "id" => $result->id,
+    //     "datatable_id" => "datatable",
+    // ],
+    // "reorder" => $result->id,
+    // "link" => [
+    //     "url" =>  route('role.edit', [$result->id]),
+    //     "icon" => "fa-action fas fa-check-circle",
+    // ],
+    // "languageModal" => [
+    //     "id" => $result->id,
+    //     "function" => "addEdit",
+    // ],
+    // "custom" => [
+    //     "id" => $result->id,
+    //     "title" => "Check Details",
+    //     "icon" => "fa-info-circle",
+    //     "function" => "checkPaymentDetails",
+    // ],
+     */
+    function actionButtons($data)
+    {
+        $html = [];
+        foreach ($data as $k => $v) {
+            // Edit Button
+            if ($k == "edit") {
+                $html[] = "<a href='{$v}' class='text-primary m-1' title='Edit'><i class='fa-action fa fa-edit'></i></a>";
+            }
+
+            // Edit Button Ajax
+            elseif ($k == "editAjax") {
+                $html[] = "<a href='javascript:' class='text-primary m-1' title='Edit' onclick='{$v["function"]}({$v["id"]})'>
+                <i class='fa-action fa ".($v['icon'] ?? 'fa-edit')."'></i></a>";
+            }
+
+            // Enable/Disable Button
+            elseif ($k == "status") {
+                $new_status = ($v["status"] == 0) ? 1 : 0;
+                $temp = "<a href='javascript: confirmStatusModal({$v["id"]}, {$new_status}, \"{$v["datatable_id"]}\")'";
+                if ($v["status"] == 0) {
+                    $temp .= "class=' m-1' title='Enable'><i class='fa-action fas fa-toggle-off'></i>";
+                } else {
+                    $temp .= "class='text-success m-1' title='Disable'><i class='fa-action fas fa-toggle-on'></i>";
+                }
+                $temp .= "</a>";
+
+                $html[] = $temp;
+            }
+
+            // Delete Button
+            elseif ($k == "delete") {
+                $html[] = "<a href='#' onclick='return confirmStatusModal(\"{$v["id"]}\", 2, \"{$v["datatable_id"]}\")'
+                                class='text-danger m-1' title='Delete'><i class='fa-action fa fa-trash'></i></a>";
+            }
+
+            // Delete Button
+            elseif ($k == "search_keys") {
+                $html[] = "<a href='javascript:void(0);' onclick='searchKeys({$v["id"]});' class='text-secondary m-1' title='search Keys'><i class='fa-action fa fa-search'></i></a>";
+            }
+
+            // Reorder
+            elseif ($k == "reorder") {
+                $html[] = "<i class='fas fa-arrows-alt reorder'></i>";
+            }
+
+            // Link
+            elseif ($k == "link") {
+                $html[] = "<a href='{$v["url"]}' class='text-primary m-1'><i class='{$v["icon"]}'></i></a>";
+            }
+
+            elseif ($k == "link-text-another-tab") {
+                $html[] = "<a href='{$v["url"]}' class='text-primary m-1' target='_blank'><i class='{$v["icon"]}'></i></a>";;
+            }
+
+            // Language Box
+            elseif ($k == "languageModal") {
+                $html[] = "<a href='javascript:' class='text-primary m-1' title='Edit' onclick='{$v["function"]}({$v["id"]})'>
+                <i class='fa-action fa fa-edit'></i></a>";
+            }
+
+            // Edit Button Ajax
+            elseif ($k == "custom") {
+                $html[] = "<a href='javascript:' class='text-primary m-1' title='{$v["title"]}' onclick='{$v["function"]}({$v["id"]})'>
+                <i class='fa-action fa {$v["icon"]}'></i></a>";
+            }
+            elseif ($k == "link-icon") {
+                $html[] = "<a href='{$v["link"]}' class='text-primary m-1' title='{$v["title"]}' >
+                <i class='fa-action fa {$v["icon"]}'></i></a>";
+            }
+            elseif ($k == "link-icon-danger") {
+                $html[] = "<a href='{$v["link"]}' class='text-primary btn btn-danger btn-sm m-1' title='{$v["title"]}' >{$v['text']}</a>";
+            }
+            elseif ($k == "link-icon-2") {
+                $html[] = "<a href='{$v["link"]}' class='text-primary m-1' title='{$v["title"]}' >
+                <i class='fa-action fa {$v["icon"]}'></i></a>";
+            }
+            elseif ($k == "link-icon-3") {
+                $html[] = "<a href='{$v["link"]}' class='text-primary m-1' title='{$v["title"]}' >
+                <i class='{$v["icon"]}'></i></a>";
+            }
+            elseif ($k == "link-text") {
+                $html[] = "<a href='{$v["link"]}' class='btn btn-".($v["btn"] ?? 'primary')." btn-sm' title='".($v["title"] ?? '')."' ".($v['extra'] ?? '') ." >
+                {$v['text']}</a>";
+            }
+            elseif ($k == "link-text-2") {
+                $html[] = "<a href='{$v["link"]}' class='btn btn-".($v["btn"] ?? 'primary')." btn-sm' title='".($v["title"] ?? '')."' >{$v['text']}</a>";
+            }
+            elseif ($k == "link-text-3") {
+                $html[] = "<a href='{$v["link"]}' class='btn btn-".($v["btn"] ?? 'primary')." btn-sm' title='".($v["title"] ?? '')."' >
+                {$v['text']}</a>";
+            }
+
+        }
+
+        return implode("", $html);
+    }
+}
