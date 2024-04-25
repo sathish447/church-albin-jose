@@ -19,7 +19,6 @@
                 </a>
             </li>
 
-            @can('role')
             <li class="nav-item">
                 <a href="{{ route('role.index') }}"
                 class="nav-link @if ($active == 'role') active @endif">
@@ -28,8 +27,7 @@
                     Roles
                 </p>
             </a>
-        </li>
-        @endcan
+
 
         @can("user")
         <li class="nav-item">
@@ -42,6 +40,15 @@
         </a>
     </li>
     @endcan
+
+
+             <li class="nav-item">
+                    <a href="{{ route('admin.dashboard') }}"
+                    class="nav-link @if ($active == 'dashboard') active @endif">
+                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                    <p>Logout</p>
+                </a>
+            </li>
 </ul>
 </nav>
 </div>

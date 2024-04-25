@@ -11,12 +11,12 @@
         </ul>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown user-menu">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+            <!--     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                   <img src="{{ (auth()->user()->photo) ? auth()->user()->photo : asset('themes/admin/images/user.png') }}" class="user-image img-circle elevation-2" alt="User Image">
 
                     <span class="d-none d-md-inline">{{ auth()->user()->name }}</span>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                </a> -->
+          <!--       <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                     <li class="user-header bg-secondary">
                         <img src="{{ auth()->user()->photo }}" class="img-circle elevation-2" alt="User Image">
                         <p>
@@ -34,7 +34,7 @@
                             @csrf
                         </form>
                     </li>
-                </ul>
+                </ul> -->
             </li>
         </ul>
     </nav>

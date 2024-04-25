@@ -87,5 +87,8 @@
   <!-- Scripts -->
   @include('layouts.scripts')
 
-  @yield('scripts')
+  @yield('script')
   @stack('scripts')
+
+</body>
+</html>

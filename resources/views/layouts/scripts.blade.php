@@ -1,6 +1,4 @@
-<!-- jQuery -->
 <script src="{{ btheme() }}/plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
 <script src="{{ btheme() }}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- DataTables & Plugins -->
 <script src="{{ btheme() }}/plugins/datatables/jquery.dataTables.min.js"></script>
@@ -20,26 +18,10 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{ btheme() }}/dist/js/demo.js"></script>
 <!-- Page specific script -->
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        @if (Session::has('error'))
-        notification("error", "{!! Session::get('error') !!}");
-        @endif
-
-        @if ($errors->any())
-        notification("error", $("#error_list").html());
-        @endif
-
-        @if (Session::has('success'))
-        notification("success", "{!! Session::get('success') !!}");
-        @endif
-
-        // customFormValidation('form');
-        $.extend(true, $.fn.dataTable.defaults, {
-            stateSave: true,
-            // responsive: true,
-        });
-        $('.table').parent().addClass("table-responsive");
-    });
-</script>
+<script src="{{ btheme() }}/js/custom.js"></script>
+<script src="{{ btheme() }}/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<script src="{{ btheme() }}/plugins/toastr/toastr.min.js"></script>
+<script src="{{ btheme() }}/plugins/sweetalert2/sweetalert2.min.js"></script>
+<script src="{{ btheme() }}/plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="{{ btheme() }}/plugins/datatables-rowreorder/js/dataTables.rowReorder.min.js"></script>
+<script src="{{ btheme() }}/plugins/datatables-rowreorder/js/rowReorder.bootstrap4.min.js"></script>
